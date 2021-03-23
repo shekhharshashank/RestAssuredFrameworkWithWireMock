@@ -2,6 +2,7 @@ package com.withRestAssured.model.apiobjects;
 
 import java.util.Map;
 
+import com.relevantcodes.extentreports.LogStatus;
 import com.withRestAssured.model.Requests.RequestModel;
 
 import io.restassured.response.Response;
@@ -15,7 +16,8 @@ public class Type1ApiObjects extends RequestModel {
 	
 	public Response getTeamsDetails(Map<String,String> headerMap) {
 		basePath=BASE_URL+ENDPOINT_GET_TEAMS;
-		Response apiResponse=getRequests(basePath, headerMap);	
+		apiResponse=getRequests(basePath, headerMap);
+		test.log(LogStatus.INFO,"Response :-"+ this.apiResponse.prettyPrint());
 		return apiResponse;		
 	}
 	

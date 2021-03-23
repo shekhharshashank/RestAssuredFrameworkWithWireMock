@@ -1,5 +1,6 @@
 package com.withRestAssured.model.apiobjects;
 
+import com.relevantcodes.extentreports.LogStatus;
 import com.withRestAssured.model.Requests.RequestModel;
 
 import io.restassured.response.Response;
@@ -12,7 +13,8 @@ public class Type2ApiObjects extends RequestModel{
 	
 	public Response createUsers(Object payload) {
 		basePath=BASE_URL+CREATE_USERS;
-		Response apiResponse=postRequests(basePath, payload);
+		apiResponse=postRequests(basePath, payload);
+		test.log(LogStatus.INFO,"Response :-"+ this.apiResponse.prettyPrint());
 		return apiResponse;
 		
 	}

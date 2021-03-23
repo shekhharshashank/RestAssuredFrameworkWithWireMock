@@ -1,6 +1,8 @@
 package com.withRestAssured.Specification;
 
 import java.io.File;
+import java.io.PrintStream;
+import java.io.StringWriter;
 
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -10,11 +12,19 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-public class ExtentReportListner implements ITestListener{
+import io.restassured.internal.RequestSpecificationImpl;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
+public class ExtentReportListner  implements ITestListener{
 	
 	protected static ExtentReports reports;
 	protected static ExtentTest test;
-	
+	public static  PrintStream  requestCapture;
+	public static StringWriter requestWriter;
+	public Response apiResponse;
+	public RequestSpecificationImpl request;
+	public RequestSpecification requestSpecification;
 	private static String resultpath = getResultPath();
 
 
@@ -49,21 +59,24 @@ public class ExtentReportListner implements ITestListener{
 
 		test = reports.startTest(result.getMethod().getMethodName());
 		test.log(LogStatus.INFO, result.getMethod().getMethodName());
-		System.out.println(result.getTestClass().getTestName());
-		System.out.println(result.getMethod().getMethodName());
+		//System.out.println(result.getTestClass().getTestName());
+		//System.out.println(result.getMethod().getMethodName());
+		reports.addSystemInfo("UserName", "Shashank");
 	}
 
 	public void onTestSuccess(ITestResult result) {
+		test.log(LogStatus.INFO, result.getMethod().getMethodName());
 		test.log(LogStatus.PASS, "Test is pass");
-
 	}
 
 	public void onTestFailure(ITestResult result) {
-		test.log(LogStatus.FAIL, "Test is fail");
-
+		test.log(LogStatus.FAIL, "Test  Failed");
+		test.log(LogStatus.FAIL, "Caused Due to:- "+result.getThrowable());
+		//test.log(LogStatus.FAIL, result.getThrowable().getStackTrace());
 	}
 
 	public void onTestSkipped(ITestResult result) {
+		
 		test.log(LogStatus.SKIP, "Test is skipped");
 
 	}
@@ -74,17 +87,16 @@ public class ExtentReportListner implements ITestListener{
 	}
 
 	public void onStart(ITestContext context) {
-		System.out.println(ReportLocation + "  ReportLocation");
-		reports = new ExtentReports(ReportLocation + "ExtentReport.html");
-		test = reports.startTest("");
+		//System.out.println(ReportLocation + "  ReportLocation");
+		reports = new ExtentReports(ReportLocation + "TestReport.html");
+		
 
 	}
 
 	public void onFinish(ITestContext context) {
 		reports.endTest(test);
 		reports.flush();
-
+		
 	}
 	
-
 }

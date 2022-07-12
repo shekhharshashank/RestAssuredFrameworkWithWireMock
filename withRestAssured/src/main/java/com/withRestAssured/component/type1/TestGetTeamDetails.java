@@ -22,16 +22,25 @@ public class TestGetTeamDetails extends ProjectBaseTest implements ITest{
 	public Response apiResponse;
 	public Type1ApiObjects type1ApiObjects;
 	
+	/**
+	 * 
+	 */
 	@BeforeMethod(alwaysRun=true)
 	public void beforeMethods() {
 		type1ApiObjects= new Type1ApiObjects();
 	}
 	
+	/**
+	 * 
+	 */
 	@AfterMethod(alwaysRun=true)
 	public void afterMethods() {
 		type1ApiObjects= null;
 	}
 	
+	/**
+	 * @throws IOException
+	 */
 	@Test(enabled=true,groups="type1",testName="Test1",description="Test1",priority=1)
 	public void Test1() throws IOException {
 	
@@ -47,6 +56,9 @@ public class TestGetTeamDetails extends ProjectBaseTest implements ITest{
 		
 	}
 	
+	/**
+	 * @throws IOException
+	 */
 	@Test(enabled=true,groups="type1",testName="Test2",description="Test2",priority=2)
 	public void Test2() throws IOException {
 	
@@ -66,6 +78,9 @@ public class TestGetTeamDetails extends ProjectBaseTest implements ITest{
 
 	
 	//For Logging The Method Name and ClassName.
+	/**
+	 *
+	 */
 	@Override
 	public String getTestName() {
 		return TestGetTeamDetails.class.getName();

@@ -27,6 +27,11 @@ public class ProjectBaseTest extends ExtentReportListner{
 	public static final String BASEURL = "baseUrl";
 	public String PORTNO = "port";
 	public boolean flag = false;
+	protected final String BASE_URL_WIREMOCK="http://localhost:8080";
+	protected static final int PORT=8080;
+	protected static final String HOST="localhost";
+ 
+	
 	
 	public void readvaluesFromTestng(String valuetobeRead) {
 
